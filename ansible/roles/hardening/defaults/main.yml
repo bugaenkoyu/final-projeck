@@ -1,0 +1,39 @@
+---
+# defaults file for hardening
+
+
+# 1.4.1 Ensure permissions on bootloader config are not overridden
+protect_bootloader_permissions: true
+## 1.4.2 Ensure bootloader password is set (using grub): default is no
+set_bootloader_credentials: no
+### Update the default bootloader user and password
+bootloader_credentials: { user: "root", password: "b00tl04derPwd" }
+# 1.4.3 Ensure authentication required for single user mode
+set_root_password: yes
+root_password: r00tP4ssw0rd
+# Section 4 Settings
+## Ensure rsyslog is configured to send logs to a remote log host
+remoteSyslog:
+  enable: false
+  host: 192.168.2.100
+  port: 514
+  protocol: tcp
+logrotate_policy: "daily"
+## auditd config
+architecture: "x86_64"
+admin_space_left_action: halt
+max_log_file_action: keep_logs
+max_log_file: 10
+backlog_limit: "8192"
+space_left_action: email
+action_mail_acct: root
+grub_backlog_limit: 8192
+# 5.3.7 Ensure SSH MaxAuthTries is set to 4 or less
+max_auth_tries: 4
+## 5.3.21 Ensure SSH MaxStartups is configured
+ssh_max_startups: "10:30:100"
+# Section 5 PAM config
+usersAllowedToSuAccess:
+  - root
+adminGroup: root
+

@@ -1,0 +1,13 @@
+---
+
+apiVersion : v2
+name       : Wordpress
+description: Setup Wordpress wia Helm on K8s cluster
+type       : application
+version    : 0.1.0
+appVersion : "1.0.0"
+
+maintainers:
+  - name : Yuriy Bugaaenko
+    email: beluudom@gmail.com
+    url  : wp-final-task.dynv6.net

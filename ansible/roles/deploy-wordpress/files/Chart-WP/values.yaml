@@ -1,0 +1,8 @@
+---
+
+container:
+  image: wordpress:php8.1-fpm
+
+replicaCount: 3
+
+host: wp-final-task.dynv6.net
