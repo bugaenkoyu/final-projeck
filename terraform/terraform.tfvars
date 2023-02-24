@@ -5,8 +5,8 @@
 
   tier = "db-f1-micro"
   disk_size = 10
-  name = "bugaenko"
-  password = "po1%@GHd%69"
+  name = YOU_USER_NAME
+  password = YOU_BD_USER_PASSWD
   
 
  
