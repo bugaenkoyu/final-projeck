@@ -1,0 +1,7 @@
+---
+- name: Deploy Wordpress on K8s cluster
+  hosts: all
+  become: yes
+
+  roles:
+  - deploy-wordpress

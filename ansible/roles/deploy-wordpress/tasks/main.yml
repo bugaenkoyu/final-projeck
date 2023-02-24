@@ -22,6 +22,22 @@
     name: helm
     classic: true
 
+- name: Copy helm chart
+  ansible.builtin.copy:
+      src: wordpress/
+      dest: wordpress/
+      backup: yes
+
+- name: Verify Permissions on wordpress/
+  ansible.builtin.file:
+    path: wordpress/
+    mode: '0777'
+
+- name: Deploy
+  kubernetes.core.helm:
+    name: wordpress
+    chart_ref: wordpress/
+    release_namespace: default
 
 
 
