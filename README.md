@@ -55,5 +55,5 @@ I used ansible to deliver the files to the VM and also to start the execution.
 
 As a result, we have wordpress installed.
 
-![](images/wp-install.png)
-![](images/wp-admin.png)
+![wp install](images/wp-install.png)
+![wp admin](images/wp-admin.png)
