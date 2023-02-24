@@ -1,9 +1,10 @@
-ansible/
+#ansible/
 prod_clusterIssuer.yaml
 staging_clusterIssuer.yaml
 test/
-.terraform
 devops-bc-terraform.json
 terraform.tfstate
 terraform.tfstate.backup
 .terraform.lock.hcl
+bitnami/
+.terraform

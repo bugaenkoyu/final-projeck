@@ -2,6 +2,7 @@ resource "google_sql_database_instance" "mysql-from-terraform" {
   name             = "mysql-from-terraform"
   database_version = "MYSQL_8_0"
   region           = var.region
+  zone             = var.zone
 
   settings {
     tier = var.tier
@@ -21,7 +22,6 @@ resource "google_sql_database_instance" "mysql-from-terraform" {
   }
   deletion_protection = "false"
 }
-
 
 resource "google_sql_database" "my-database-by-tf" {
   name     = "my-database-by-tf"

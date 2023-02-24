@@ -8,7 +8,7 @@ resource "google_compute_instance" "final-task-server" {
     }
 
   network_interface {
-    network    = var.network
+    network    = var.private_network
     subnetwork = var.subnetwork
     access_config {
     }
