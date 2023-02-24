@@ -1,10 +1,27 @@
 ---
 # tasks file for deploy-wordpress
-- name: Deploy Wordpress chart from local path
-  kubernetes.core.helm:
-    name: Deploy WP
-    chart_ref: /home/svjtosha/Documents/final-task/ansible/roles/deploy-wordpress/files/
-    release_namespace: default
+
+- name: Creates directory .kube/
+  ansible.builtin.file:
+    path: .kube/
+    state: directory
+
+- name: Copy admin.conf
+  ansible.builtin.copy:
+      remote_src: yes
+      src: /etc/kubernetes/admin.conf
+      dest: .kube/config
+
+- name: Verify Permissions on .kube/config
+  ansible.builtin.file:
+    path: .kube/config
+    mode: '0777'
+
+- name: Install helm with option --classic
+  community.general.snap:
+    name: helm
+    classic: true
+
 
 
 

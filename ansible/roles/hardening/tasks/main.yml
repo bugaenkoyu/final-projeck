@@ -201,29 +201,6 @@
     mode: "og-rwx"
   tags:
     - 1.4.3
-# 1.4.4 Ensure authentication required for single user mode
-# Single user mode is used for recovery when the system detects an issue during boot or by
-# manual selection from the bootloader.
-- name: 1.4.4 Ensure authentication required for single user mode
-  block:
-    - name: 1.4.4 Ensure authentication required for single user mode - check root_password has been changed
-      fail:
-        msg: "Exiting: Change root_password from r00tP4ssw0rd in defaults/main.yml"
-      when: root_password is match ("r00tP4ssw0rd")
-
-    - name: 1.4.4 Ensure authentication required for single user mode - create a root password
-      user: 
-        name: root 
-        update_password: always 
-        password: "{{root_password | password_hash('sha512')}}"
-
-  rescue:
-    - name: Continue after failing 1.4.4
-      debug:
-        msg: "Continuing with playbook execution"
-  when: set_root_password and root_password
-  tags:
-    - 1.4.4
 
 # Section 3, nftables Package
 - name: Install nftables Package
@@ -297,9 +274,6 @@
     regexp: "^max_log_file_action"
     line: "max_log_file_action = {{ max_log_file_action }}"
   tags:
-    - section4
-    - level_2_server
-    - level_2_workstation
     - 4.1.2.2
 # 4.1.2.3 Ensure system is disabled when audit logs are full
 - name: 4.1.2.3 Ensure system is disabled when audit logs are full
@@ -320,9 +294,6 @@
         regexp: "^action_mail_acct"
         line: "action_mail_acct = {{ action_mail_acct }}"
   tags:
-    - section4
-    - level_2_server
-    - level_2_workstation
     - 4.1.2.3
 # 4.1.3 Ensure events that modify date and time information are collected
 # Unexpected changes in system date and/or time could be a sign of malicious activity on the system.
@@ -832,4 +803,24 @@
   tags:
       - 5.4.3
 
+# Configure sysctl.conf
+- name: Copy sysctl.conf file
+  ansible.builtin.copy:
+      src: sysctl.conf
+      dest: /etc/sysctl.conf
+      backup: yes
+# Configure IPv4 iptables
+
+- name: Configure IPv6 security
+  ansible.builtin.shell: sysctl -w net.ipv6.conf.all.accept_ra=0 && sysctl -w net.ipv6.conf.all.accept_redirects=0 && sysctl -w net.ipv6.conf.default.accept_ra=0 && sysctl -w net.ipv6.conf.default.accept_redirects=0
+
+- name: Configure IPv4 security
+  ansible.builtin.shell: sysctl -w net.ipv4.conf.all.rp_filter=1 && sysctl -w net.ipv4.conf.all.secure_redirects=0 && sysctl -w net.ipv4.conf.default.rp_filter=1 && sysctl -w net.ipv4.conf.default.secure_redirects=0
+
+# Configure passwd
+- name: Copy common-password file
+  ansible.builtin.copy:
+      src: common-password
+      dest: /etc/pam.d/common-password
+      backup: yes
 

@@ -32,3 +32,12 @@ As a result of execution, the following was created:
 
 
 ## Ansible
+
+
+In the next step, I prepared an ansible role that improves the hardering of my virtual machine.
+![hardering](images/hardering.png)
+Before the role, the CIS-CAT security score was at the level of 56%.
+![before hardering](images/before-hardering.png)
+And after hardening 74%.
+![after hardering](images/after-hardering.png)
+
