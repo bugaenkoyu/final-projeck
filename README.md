@@ -14,7 +14,7 @@ ___Kubernetes:___
 - prepare ansible-playbook for deploying Wordpress
 - deploy WordPress with connection to DataBase
 
-============================================================================
+================================================================================
 
 ## Terraform
 
@@ -34,10 +34,26 @@ As a result of execution, the following was created:
 ## Ansible
 
 
-In the next step, I prepared an ansible role that improves the hardering of my virtual machine.
-![hardering](images/hardering.png)
+In the next step, I prepared an ansible role that improves the hardening of my virtual machine.
+![hardening](images/hardering.png)
 Before the role, the CIS-CAT security score was at the level of 56%.
-![before hardering](images/before-hardering.png)
+![before hardening](images/before-hardering.png)
 And after hardening 74%.
-![after hardering](images/after-hardering.png)
+![after hardening](images/after-hardering.png)
 
+ ### Deploy K8s single-node cluster via Kubespray
+
+For this task, I cloned the Kubespray release repository to my local machine. In the next step, I configured the inventory files and ran execute container.
+After successful execution, Kubernetes was installed.
+![setup Kubernetes](images/ansible.png)
+
+## Kubernetes
+
+In this part of the final task, I prepared a Helm Chart that installs wordpress in a Kubernetes cluster and connects to it the SQL database created in the first step.
+
+I used ansible to deliver the files to the VM and also to start the execution.
+
+As a result, we have wordpress installed.
+
+![](images/wp-install.png)
+![](images/wp-admin.png)
